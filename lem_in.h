@@ -6,20 +6,29 @@
 # include "libft.h"
 # include <fcntl.h>
 
-typedef struct	s_fdf_iso
-{
-	double		x;
-	double		y;
-	double		z;
-}				t_iso;
 
-typedef struct	s_fdf_nod
+typedef struct	s_graph
 {
-	int			x;
-	int			y;
-	int			z;
-	int			argb;
-}				t_nod;
+	struct s_room	*start;
+	int				ants;
+}					t_graph;
 
+typedef struct	s_room
+{
+	char			*name;
+	int				x;
+	int				y;
+	struct s_room	*next;
+}					t_room;
+
+typedef struct	s_link
+{
+	struct s_room	*room;
+	struct s_link	*next;
+}					t_link;
+
+
+int		ft_read_valid(t_graph **base, int argc, char **argv);
+int		ft_get_ants(int fd);
 
 #endif
