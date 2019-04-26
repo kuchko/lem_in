@@ -27,6 +27,8 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
+
+
 int	ft_read_valid(t_graph **base,int argc, char **argv)
 {
 	int		fd;
@@ -40,23 +42,18 @@ int	ft_read_valid(t_graph **base,int argc, char **argv)
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		ft_error("ERROR:	open input_file error\n");
 
-
 	if (!((*base)->ants = ft_get_ants(fd)))
-		ft_error("ERROR\n");
+		return(0);
+	if (!(ft_get_rooms_n_links(fd, base)))
+		return(0);
 	ft_printf("%d\n", (*base)->ants);
 
-
 	close(fd);
-	// if (wire->y_range > 10000)
-	// 	ft_error("map is too big\n");
-	// if (ft_valid_symbols(*start, wire->y_range) == 0)
-	// 	ft_error("invalid symbols in file\n");
-	// if (!ft_make_valid_wire(*start, wire))
-	// 	ft_error("map error. coordinates might be out of range.\n");
 	return(1);
 }
 
-int ft_get_ants(int fd)
+
+int	ft_get_ants(int fd)
 {
 	int res;
 	char *line;
@@ -79,3 +76,37 @@ int ft_get_ants(int fd)
 		free(line);
 	return(res < 1 ? 0 : res);
 }
+
+int	ft_get_rooms_n_links(int fd, t_graph **base)
+{
+	int i; //?
+	char *l;
+
+	i = 0;
+	if (get_next_line(fd, &l) > 0)
+	{
+		if (l && ft_get_rooms(fd, &l, *base) && (*base)->f_rooms == 1)
+			ft_get_links(fd, &l, *base);
+		free(l);
+	}
+
+	// while(get_next_line(fd, &l) > 0 && ++i)
+	// {
+	// 	// if (ft_strlen(l) == 0)
+	// 	// 	break ;
+	// 		if ((*base)->f_links == 0)
+	// 		ft_get_rooms(fd, *base, l);
+	// 	free(l);
+	// }
+	// //i > 0 ? free(l) : 0;
+
+//	if ((*base)->f_start && (*base)->f_end && (*base)->f_rooms && (*base)->f_links)
+	if ((*base)->f_rooms && (*base)->f_links)
+		return (1);
+	else
+		free_lists();
+	return (0);
+}
+
+
+

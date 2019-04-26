@@ -10,6 +10,12 @@
 typedef struct	s_graph
 {
 	struct s_room	*start;
+	struct s_room	*end;
+	int				f_start;
+	int				f_end;
+	int				f_rooms;
+	int				f_links;
+
 	int				ants;
 }					t_graph;
 
