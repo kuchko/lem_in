@@ -12,6 +12,20 @@
 
 #include "lem_in.h"
 
+void	ft_show_all(t_graph *base)
+{
+	t_room *tmp;
+
+	ft_printf("%d\n", base->ants);
+	tmp = base->start;
+	while(tmp)
+	{
+		ft_printf("%s %d %d\n", tmp->name, tmp->x, tmp->y);
+		tmp = tmp->next;
+	}
+}
+
+
 int		main(int argc, char **argv)
 {
 	t_graph	*base;
@@ -22,14 +36,14 @@ int		main(int argc, char **argv)
 	if (base == NULL || !(ft_read_valid(&base, argc, argv)))
 		ft_error("ERROR\n");
 
-
+	ft_show_all(base);
 	system("leaks lem-in > leaks");
 	return (0);
 }
 
 
 
-int	ft_read_valid(t_graph **base,int argc, char **argv)
+int	ft_read_valid(t_graph **base, int argc, char **argv)
 {
 	int		fd;
 
@@ -46,7 +60,7 @@ int	ft_read_valid(t_graph **base,int argc, char **argv)
 		return(0);
 	if (!(ft_get_rooms_n_links(fd, base)))
 		return(0);
-	ft_printf("%d\n", (*base)->ants);
+
 
 	close(fd);
 	return(1);
@@ -85,7 +99,7 @@ int	ft_get_rooms_n_links(int fd, t_graph **base)
 	i = 0;
 	if (get_next_line(fd, &l) > 0)
 	{
-		if (l && ft_get_rooms(fd, &l, *base) && (*base)->f_rooms == 1)
+		if (l && ft_get_rooms(fd, &l, *base))
 			ft_get_links(fd, &l, *base);
 		free(l);
 	}

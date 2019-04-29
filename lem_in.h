@@ -6,13 +6,18 @@
 # include "libft.h"
 # include <fcntl.h>
 
+typedef enum			e_align
+{
+	none, start, end
+}						t_align;
 
 typedef struct	s_graph
 {
+	struct s_room	*rms;
 	struct s_room	*start;
 	struct s_room	*end;
-	int				f_start;
-	int				f_end;
+	// int				f_start;
+	// int				f_end;
 	int				f_rooms;
 	int				f_links;
 
