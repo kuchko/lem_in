@@ -1,13 +1,13 @@
-Process:         lem-in [47889]
+Process:         lem-in [23492]
 Path:            /Users/okuchko/projects_hub/lem_in/lem-in
-Load Address:    0x10cbe9000
+Load Address:    0x106997000
 Identifier:      lem-in
 Version:         ???
 Code Type:       X86-64
-Parent Process:  zsh [47583]
+Parent Process:  zsh [5145]
 
-Date/Time:       2019-04-26 14:10:10.464 +0300
-Launch Time:     2019-04-26 14:10:10.258 +0300
+Date/Time:       2019-04-30 20:18:50.655 +0300
+Launch Time:     2019-04-30 20:18:50.438 +0300
 OS Version:      Mac OS X 10.13.3 (17D47)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
@@ -15,5 +15,5 @@ Analysis Tool Version:  Xcode 9.2 (9C40b)
 ----
 
 leaks Report Version:  2.0
-Process 47889: 160 nodes malloced for 13 KB
-Process 47889: 0 leaks for 0 total leaked bytes.
+Process 23492: 167 nodes malloced for 13 KB
+Process 23492: 0 leaks for 0 total leaked bytes.

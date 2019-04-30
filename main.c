@@ -16,13 +16,21 @@ void	ft_show_all(t_graph *base)
 {
 	t_room *tmp;
 
-	ft_printf("%d\n", base->ants);
-	tmp = base->start;
+	ft_printf("					show all: ants=> %d", base->ants);
+
+
+
+	tmp = base->rms;
 	while(tmp)
 	{
-		ft_printf("%s %d %d\n", tmp->name, tmp->x, tmp->y);
+		ft_printf("|  name = %s; x = %d; y = %d  ", tmp->name, tmp->x, tmp->y);
 		tmp = tmp->next;
 	}
+	if(base->start)
+		ft_printf("START >>> name = %s; x = %d; y = %d  ", base->start->name, base->start->x, base->start->y);
+	if(base->end)
+		ft_printf("| END >>> name = %s; x = %d; y = %d  ", base->end->name, base->end->x, base->end->y);
+	ft_printf("\n");
 }
 
 
@@ -33,8 +41,9 @@ int		main(int argc, char **argv)
 	base = ft_memalloc(sizeof(t_graph));
 
 
+
 	if (base == NULL || !(ft_read_valid(&base, argc, argv)))
-		ft_error("ERROR\n");
+		ft_error("ERROR_tut\n");
 
 	ft_show_all(base);
 	system("leaks lem-in > leaks");
@@ -100,7 +109,10 @@ int	ft_get_rooms_n_links(int fd, t_graph **base)
 	if (get_next_line(fd, &l) > 0)
 	{
 		if (l && ft_get_rooms(fd, &l, *base))
+		{
+			//ft_show_all(*base);
 			ft_get_links(fd, &l, *base);
+		}
 		free(l);
 	}
 
@@ -117,10 +129,11 @@ int	ft_get_rooms_n_links(int fd, t_graph **base)
 //	if ((*base)->f_start && (*base)->f_end && (*base)->f_rooms && (*base)->f_links)
 	if ((*base)->f_rooms && (*base)->f_links)
 		return (1);
-	else
-		free_lists();
+	// else
+	// 	free_lists();
 	return (0);
 }
 
+// void free_lists(t_graph **base);
 
 
