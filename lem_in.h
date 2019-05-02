@@ -22,6 +22,7 @@ typedef struct	s_graph
 	int				f_links;
 
 	int				ants;
+	char			*tmp;
 }					t_graph;
 
 typedef struct	s_room
@@ -46,7 +47,8 @@ int		ft_get_rooms_n_links(int fd, t_graph **base);
 int		ft_get_rooms(int fd, char **l, t_graph *base);
 int		ft_get_room(t_graph *base, char *l, t_align al);
 t_room*	ft_room_add(t_graph *base, char *name, char *x_new, char *y_new);
-int		ft_check_hash(t_graph *base, char **l);
+int	ft_get_room_start_or_fin(t_graph *base, char **l, int fd);
+//int		ft_check_hash(t_graph *base, char **l);
 
 int		ft_get_links(int fd, char **l, t_graph *base);
 

@@ -12,39 +12,14 @@
 
 #include "lem_in.h"
 
-void	ft_show_all(t_graph *base)
-{
-	t_room *tmp;
-
-	ft_printf("					show all: ants=> %d", base->ants);
-
-
-
-	tmp = base->rms;
-	while(tmp)
-	{
-		ft_printf("|  name = %s; x = %d; y = %d  ", tmp->name, tmp->x, tmp->y);
-		tmp = tmp->next;
-	}
-	if(base->start)
-		ft_printf("START >>> name = %s; x = %d; y = %d  ", base->start->name, base->start->x, base->start->y);
-	if(base->end)
-		ft_printf("| END >>> name = %s; x = %d; y = %d  ", base->end->name, base->end->x, base->end->y);
-	ft_printf("\n");
-}
-
-
 int		main(int argc, char **argv)
 {
 	t_graph	*base;
 
 	base = ft_memalloc(sizeof(t_graph));
 
-
-
 	if (base == NULL || !(ft_read_valid(&base, argc, argv)))
 		ft_error("ERROR_tut\n");
-
 	ft_show_all(base);
 	system("leaks lem-in > leaks");
 	return (0);
@@ -67,6 +42,7 @@ int	ft_read_valid(t_graph **base, int argc, char **argv)
 
 	if (!((*base)->ants = ft_get_ants(fd)))
 		return(0);
+	ft_printf("ants are read = %d\n", (*base)->ants);
 	if (!(ft_get_rooms_n_links(fd, base)))
 		return(0);
 
@@ -102,19 +78,28 @@ int	ft_get_ants(int fd)
 
 int	ft_get_rooms_n_links(int fd, t_graph **base)
 {
-	int i; //?
+	//int i; //?
 	char *l;
+	char **m;
 
-	i = 0;
-	if (get_next_line(fd, &l) > 0)
-	{
-		if (l && ft_get_rooms(fd, &l, *base))
-		{
-			//ft_show_all(*base);
-			ft_get_links(fd, &l, *base);
-		}
-		free(l);
-	}
+	m = &l;
+	//i = 0;
+
+
+	if (ft_get_rooms(fd, m, *base))
+		ft_get_links(fd, m, *base);
+
+	// free(m);
+
+	// if (get_next_line(fd, &l) > 0)
+	// {
+	// 	if (l && ft_get_rooms(fd, &l, *base))
+	// 	{
+	// 		//ft_show_all(*base);
+	// 		ft_get_links(fd, &l, *base);
+	// 	}
+	// 	free(l);
+	// }
 
 	// while(get_next_line(fd, &l) > 0 && ++i)
 	// {
@@ -134,6 +119,25 @@ int	ft_get_rooms_n_links(int fd, t_graph **base)
 	return (0);
 }
 
-// void free_lists(t_graph **base);
 
 
+void	ft_show_all(t_graph *base)
+{
+	t_room *tmp;
+
+	ft_printf("					show all: ants=> %d", base->ants);
+
+
+
+	tmp = base->rms;
+	while(tmp)
+	{
+		ft_printf("|  name = %s; x = %d; y = %d  ", tmp->name, tmp->x, tmp->y);
+		tmp = tmp->next;
+	}
+	if(base->start)
+		ft_printf("START >>> name = %s; x = %d; y = %d  ", base->start->name, base->start->x, base->start->y);
+	if(base->end)
+		ft_printf("| END >>> name = %s; x = %d; y = %d  ", base->end->name, base->end->x, base->end->y);
+	ft_printf("\n");
+}
