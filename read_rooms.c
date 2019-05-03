@@ -1,31 +1,37 @@
 #include "lem_in.h"
 
-int		ft_get_rooms(int fd, char **l, t_graph *base)
+
+int	ft_get_rooms_n_links(int fd, t_graph *base)
 {
-//	int i;
+	char *l;
+
 	ft_printf("ft_get_roomS\n");
-	while(get_next_line(fd, l) > 0)
+	while(get_next_line(fd, &l) > 0)
 	{
-		ft_printf("ft_get_rooms in while => %s\n", *l);
-		if (l[0][0] == '#')
+		ft_printf("ft_get_rooms in while => %s\n", l);
+		if (l[0] == '#')
 		{
-			ft_printf(" %s    ->> 1- hash found\n", *l);
-			if (l[0][1] == '#' && ft_get_room_start_or_fin(base, l, fd) == 0)
+			ft_printf(" %s    ->> 1- hash found\n", l);
+			if (l[1] == '#' && ft_get_room_start_or_fin(base, &l, fd) == 0)
 				ft_error("ERROR\n");
 		}
-		else if (ft_get_room(base, *l, normal) == 0)
+		else if (ft_get_room(base, l, normal) == 0)
 		{
-			ft_printf(" %s    ->> 2- rooms are over\n", *l);
-			base->tmp = ft_strdup(*l);
-			free(*l);
+			ft_printf(" %s    ->> 2- rooms are over\n", l);
+			ft_get_links(fd, l, base);
 			break;
 		}
-		free(*l);
+		free(l);
 	}
-	//i > 0 ? free(l) : 0;
-	base->f_rooms = base->start && base->end ? 1 : 0;
-	return (base->f_rooms);
+	// free(l);
+	// base->f_links = 1; // to dell
+	// base->f_rooms = 1; // to dell
+	if (base->f_rooms && base->f_links)
+		return (1);
+	return (0);
 }
+
+
 
 int			ft_get_room(t_graph *base, char *l, t_align al)
 {
@@ -57,8 +63,6 @@ int			ft_get_room(t_graph *base, char *l, t_align al)
 	return (i);
 }
 
-
-
 int	ft_get_room_start_or_fin(t_graph *base, char **l, int fd)
 {
 	t_align	al;
@@ -78,6 +82,31 @@ int	ft_get_room_start_or_fin(t_graph *base, char **l, int fd)
 	return (1);
 }
 
+
+// int		ft_get_rooms(int fd, t_graph *base)
+// {
+// 	char *l;
+
+// 	ft_printf("ft_get_roomS\n");
+// 	while(get_next_line(fd, &l) > 0)
+// 	{
+// 		ft_printf("ft_get_rooms in while => %s\n", l);
+// 		if (l[0] == '#')
+// 		{
+// 			ft_printf(" %s    ->> 1- hash found\n", l);
+// 			if (l[1] == '#' && ft_get_room_start_or_fin(base, &l, fd) == 0)
+// 				ft_error("ERROR\n");
+// 		}
+// 		else if (ft_get_room(base, l, normal) == 0)
+// 		{
+// 			ft_printf(" %s    ->> 2- rooms are over\n", l);
+// 			ft_get_links(fd, l, base);
+// 			break;
+// 		}
+// 		free(l);
+// 	}
+// 	return (base->f_rooms);
+// }
 
 // int	ft_check_hash(t_graph *base, char **l)
 // {

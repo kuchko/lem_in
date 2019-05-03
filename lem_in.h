@@ -22,7 +22,7 @@ typedef struct	s_graph
 	int				f_links;
 
 	int				ants;
-	char			*tmp;
+	char			*tmp;// to del
 }					t_graph;
 
 typedef struct	s_room
@@ -31,6 +31,7 @@ typedef struct	s_room
 	int				x;
 	int				y;
 	struct s_room	*next;
+	struct s_link	*link;
 }					t_room;
 
 typedef struct	s_link
@@ -42,16 +43,18 @@ typedef struct	s_link
 
 int		ft_read_valid(t_graph **base, int argc, char **argv);
 int		ft_get_ants(int fd);
-int		ft_get_rooms_n_links(int fd, t_graph **base);
+int		ft_get_rooms_n_links(int fd, t_graph *base);
 
-int		ft_get_rooms(int fd, char **l, t_graph *base);
+//int		ft_get_rooms(int fd, t_graph *base);
+// int		ft_get_rooms(int fd, char **l, t_graph *base);
 int		ft_get_room(t_graph *base, char *l, t_align al);
 t_room*	ft_room_add(t_graph *base, char *name, char *x_new, char *y_new);
 int	ft_get_room_start_or_fin(t_graph *base, char **l, int fd);
 //int		ft_check_hash(t_graph *base, char **l);
 
-int		ft_get_links(int fd, char **l, t_graph *base);
-
+int		ft_get_links(int fd, char *l, t_graph *base);
+int ft_get_link(char *stroom1, char *stroom2, t_graph *base);
+int ft_add_link_to_room(t_room *room1, t_room *room2);
 void	ft_show_all(t_graph *base);
 
 #endif
