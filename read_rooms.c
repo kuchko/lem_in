@@ -3,29 +3,30 @@
 
 int	ft_get_rooms_n_links(int fd, t_graph *base)
 {
-	char *l;
+	int		i;
 
-	ft_printf("ft_get_roomS\n");
-	while(get_next_line(fd, &l) > 0)
+	ft_printf("ft_get_rooms_n_links\n");
+	i = 0;
+	while(get_next_line(fd, &(base->l)) > 0 && ++i)
 	{
-		ft_printf("ft_get_rooms in while => %s\n", l);
-		if (l[0] == '#')
+		ft_printf("ft_get_rooms_n_links in while => %s\n", base->l);
+		if (base->l[0] == '#')
 		{
-			ft_printf(" %s    ->> 1- hash found\n", l);
-			if (l[1] == '#' && ft_get_room_start_or_fin(base, &l, fd) == 0)
+			ft_printf(" %s    ->> 1- hash found\n", base->l);
+			if (base->l[1] == '#' && ft_get_room_start_or_fin(base, &(base->l), fd) == 0)
 				ft_error("ERROR\n");
 		}
-		else if (ft_get_room(base, l, normal) == 0)
+		else if (ft_get_room(base, base->l, normal) == 0)
 		{
-			ft_printf(" %s    ->> 2- rooms are over\n", l);
-			ft_get_links(fd, l, base);
+			ft_printf(" %s    ->> 2- rooms are over\n", base->l);
+			if ((base->f_rooms = base->start && base->end ? 1 : 0) == 0)
+				return (0);
+			ft_get_links(fd, base->l, base);
 			break;
 		}
-		free(l);
+		free(base->l);
 	}
-	// free(l);
-	// base->f_links = 1; // to dell
-	// base->f_rooms = 1; // to dell
+//	i > 0 ? free(l) : 0;
 	if (base->f_rooms && base->f_links)
 		return (1);
 	return (0);

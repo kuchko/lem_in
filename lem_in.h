@@ -22,7 +22,7 @@ typedef struct	s_graph
 	int				f_links;
 
 	int				ants;
-	char			*tmp;// to del
+	char			*l;// to del
 }					t_graph;
 
 typedef struct	s_room

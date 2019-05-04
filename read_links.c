@@ -4,12 +4,12 @@ int ft_get_links(int fd, char *l, t_graph *base)
 {
 	char **c;
 	int i;
+	int k;
 
 	ft_printf("ft_get_links: string to work => %s\n", l);
-	if ((base->f_rooms = base->start && base->end ? 1 : 0) == 0)
-		return (0);
 	i = -1;
-	while(ft_strlen(l))
+	k = 0;
+	while(ft_strlen(l) && ++k)
 	{
 		ft_printf("ft_get_links: in while  => %s\n", l);
 		i = 0;
@@ -23,10 +23,12 @@ int ft_get_links(int fd, char *l, t_graph *base)
 		if (i != 2)
 			break;
 		free(l);
+		base->f_links = 1;
 		get_next_line(fd, &l);
 	}
-	i >= 0 ? free(l) : 0;
-	base->f_links = 1;
+//	free(l);
+	k > 0 ? free(l) : 0;
+//	base->f_links = i > 0 ? 1 : 0;
 	return(base->f_links);
 }
 
@@ -44,7 +46,6 @@ int ft_get_link(char *stroom1, char *stroom2, t_graph *base)
 	room2 = base->rms;
 	while (room2 && ft_strcmp(room2->name, stroom2) != 0)
 		room2 = room2->next;
-
 	if (room1 && room2)
 		if (ft_add_link_to_room(room1, room2)
 				&& ft_add_link_to_room(room2, room1))
