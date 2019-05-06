@@ -11,18 +11,25 @@ typedef enum			e_align
 	none, normal, start, end
 }						t_align;
 
+typedef enum			e_on_off
+{
+	off, on
+}						on_off;
+
+
 typedef struct	s_graph
 {
 	struct s_room	*rms;
 	struct s_room	*start;
 	struct s_room	*end;
-	// int				f_start;
-	// int				f_end;
 	int				f_rooms;
 	int				f_links;
-
 	int				ants;
-	char			*l;// to del
+	char			*l;
+
+	int				n_rooms;
+	struct s_way	*way;
+	int				n_ways;
 }					t_graph;
 
 typedef struct	s_room
@@ -32,6 +39,8 @@ typedef struct	s_room
 	int				y;
 	struct s_room	*next;
 	struct s_link	*link;
+
+	struct s_room	*parrant;
 }					t_room;
 
 typedef struct	s_link
@@ -40,6 +49,14 @@ typedef struct	s_link
 	struct s_link	*next;
 }					t_link;
 
+typedef struct	s_way
+{
+	struct s_room	**room;
+	int				length;
+	int				expr;
+	on_off			on_off;
+
+}					t_way;
 
 int		ft_read_valid(t_graph **base, int argc, char **argv);
 int		ft_get_ants(int fd);
@@ -56,5 +73,7 @@ int		ft_get_links(int fd, char *l, t_graph *base);
 int ft_get_link(char *stroom1, char *stroom2, t_graph *base);
 int ft_add_link_to_room(t_room *room1, t_room *room2);
 void	ft_show_all(t_graph *base);
+
+int	ft_get_ways(t_graph *base);
 
 #endif

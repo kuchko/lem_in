@@ -21,6 +21,10 @@ int		main(int argc, char **argv)
 	if (base == NULL || !(ft_read_valid(&base, argc, argv)))
 		ft_error("ERROR_tut\n");
 	ft_show_all(base);
+
+	if ((base->n_ways = ft_get_ways(base)) == 0)
+		ft_error("Error: ways was not found");
+
 	system("leaks lem-in > leaks");
 	return (0);
 }
