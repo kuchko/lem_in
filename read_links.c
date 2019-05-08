@@ -13,22 +13,23 @@ int ft_get_links(int fd, char *l, t_graph *base)
 	{
 		ft_printf("ft_get_links: in while  => %s\n", l);
 		i = 0;
-		if ((c = ft_strsplit(l, '-')) == NULL)
-			ft_error("ERROR\n");
-		while(c[i])
-			i++;
-		if (i == 2)
-			i = ft_get_link(c[0], c[1], base);
-		ft_strdoublefree(c);
-		if (i != 2)
-			break;
+		if (l[0] != '#')
+		{
+			if ((c = ft_strsplit(l, '-')) == NULL)
+				ft_error("ERROR\n");
+			while(c[i])
+				i++;
+			if (i == 2)
+				i = ft_get_link(c[0], c[1], base);
+			ft_strdoublefree(c);
+			if (i != 2)
+				break;
+		}
 		free(l);
 		base->f_links = 1;
 		get_next_line(fd, &l);
 	}
-//	free(l);
 	k > 0 ? free(l) : 0;
-//	base->f_links = i > 0 ? 1 : 0;
 	return(base->f_links);
 }
 

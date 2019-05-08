@@ -30,6 +30,7 @@ typedef struct	s_graph
 	int				n_rooms;
 	struct s_way	*way;
 	int				n_ways;
+	struct s_room	**buf;
 }					t_graph;
 
 typedef struct	s_room
@@ -40,7 +41,8 @@ typedef struct	s_room
 	struct s_room	*next;
 	struct s_link	*link;
 
-	struct s_room	*parrant;
+	struct s_room	*parent;
+	on_off			on_off; // ?
 }					t_room;
 
 typedef struct	s_link
@@ -54,7 +56,7 @@ typedef struct	s_way
 	struct s_room	**room;
 	int				length;
 	int				expr;
-	on_off			on_off;
+	on_off			on_off; // ?
 
 }					t_way;
 
@@ -75,5 +77,10 @@ int ft_add_link_to_room(t_room *room1, t_room *room2);
 void	ft_show_all(t_graph *base);
 
 int	ft_get_ways(t_graph *base);
+int	ft_way_extract(t_graph *b, t_room **room);
+void ft_show_way(t_way *way);
+int	ft_bfs(t_graph *b);
+void ft_buf_clean(t_graph *b);
+int ft_start_check(t_graph *b);
 
 #endif

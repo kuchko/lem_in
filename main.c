@@ -101,6 +101,5 @@ void	ft_show_all(t_graph *base)
 		ft_printf("\n");
 		tmp = tmp->next;
 	}
-
 	ft_printf("\n");
 }
