@@ -6,12 +6,12 @@ int ft_get_links(int fd, char *l, t_graph *base)
 	int i;
 	int k;
 
-	ft_printf("ft_get_links: string to work => %s\n", l);
+	// ft_printf("ft_get_links: string to work => %s\n", l);
 	i = -1;
 	k = 0;
 	while(ft_strlen(l) && ++k)
 	{
-		ft_printf("ft_get_links: in while  => %s\n", l);
+		// ft_printf("ft_get_links: in while  => %s\n", l);
 		i = 0;
 		if (l[0] != '#')
 		{
@@ -38,7 +38,7 @@ int ft_get_link(char *stroom1, char *stroom2, t_graph *base)
 	t_room *room1;
 	t_room *room2;
 
-	ft_printf("ft_get_link\n");
+	// ft_printf("ft_get_link\n");
 	if (ft_strcmp(stroom1, stroom2) == 0)
 		return (0);
 	room1 = base->rms;
@@ -59,7 +59,7 @@ int ft_add_link_to_room(t_room *room1, t_room *room2)
 	t_link	*ptr_link;
 	t_link	*tmp_link;
 
-	ft_printf("ft_add_link_to_room %p %s %p %s\n", room1, room1->name, room2, room2->name);
+	// ft_printf("ft_add_link_to_room %p %s %p %s\n", room1, room1->name, room2, room2->name);
 	if (!(ptr_link = room1->link))
 	{
 		if (!(room1->link = (t_link*)ft_memalloc(sizeof(t_link))))
@@ -68,7 +68,7 @@ int ft_add_link_to_room(t_room *room1, t_room *room2)
 		room1->link->next = NULL; // not neccessary
 		return(1);
 	}
-	ft_printf("	ft_add_link_to_room DEBUG\n");
+	// ft_printf("	ft_add_link_to_room DEBUG\n");
 
 	tmp_link = room1->link;
 	while(tmp_link && tmp_link->next)

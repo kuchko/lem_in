@@ -5,20 +5,20 @@ int	ft_get_rooms_n_links(int fd, t_graph *base)
 {
 	int		i;
 
-	ft_printf("ft_get_rooms_n_links\n");
+	// ft_printf("ft_get_rooms_n_links\n");
 	i = 0;
 	while(get_next_line(fd, &(base->l)) > 0 && ++i)
 	{
-		ft_printf("ft_get_rooms_n_links in while => %s\n", base->l);
+		// ft_printf("ft_get_rooms_n_links in while => %s\n", base->l);
 		if (base->l[0] == '#')
 		{
-			ft_printf(" %s    ->> 1- hash found\n", base->l);
+			// ft_printf(" %s    ->> 1- hash found\n", base->l);
 			if (base->l[1] == '#' && ft_get_room_start_or_fin(base, &(base->l), fd) == 0)
 				ft_error("ERROR\n");
 		}
 		else if (ft_get_room(base, base->l, normal) == 0)
 		{
-			ft_printf(" %s    ->> 2- rooms are over\n", base->l);
+			// ft_printf(" %s    ->> 2- rooms are over\n", base->l);
 			if ((base->f_rooms = base->start && base->end ? 1 : 0) == 0)
 				return (0);
 			ft_get_links(fd, base->l, base);
@@ -41,7 +41,7 @@ int			ft_get_room(t_graph *base, char *l, t_align al)
 	t_room	*new;
 
 //	ft_printf("ft_get_room ==> %s align = %d\n", l, al);
-	ft_printf("ft_get_room\n");
+	// ft_printf("ft_get_room\n");
 	i = 0;
 	if ((c = ft_strsplit(l, ' ')) == NULL)
 		ft_error("ERROR\n");
@@ -68,7 +68,7 @@ int	ft_get_room_start_or_fin(t_graph *base, char **l, int fd)
 {
 	t_align	al;
 
-	ft_printf(" ft_check_hash => %s\n", &l[0][2]);
+	// ft_printf(" ft_check_hash => %s\n", &l[0][2]);
 	if (l[0][2] && (!(ft_strcmp(&l[0][2], "start")) || !(ft_strcmp(&l[0][2], "end"))))
 	{
 		al = ft_strcmp(&l[0][2], "start") ? end : start;

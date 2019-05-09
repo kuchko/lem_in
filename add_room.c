@@ -7,11 +7,11 @@ t_room*	ft_room_add(t_graph *base, char *name, char *x_new, char *y_new)
 	t_room	*tmp;
 	t_room	*new;
 
-	ft_printf("ft_room_add  ");
+	// ft_printf("ft_room_add  ");
 	x = ft_atoi(x_new);
 	y = ft_atoi(y_new);
 	tmp = base->rms;
-	ft_printf("got next: name = %s, x = %d, y = %d,  %p\n", name, x, y, tmp);
+	// ft_printf("got next: name = %s, x = %d, y = %d,  %p\n", name, x, y, tmp);
 	while((tmp))
 	{
 		//ft_printf("inwhile\n");
@@ -34,8 +34,8 @@ t_room*	ft_room_add(t_graph *base, char *name, char *x_new, char *y_new)
 	}
 	else
 		base->rms = new;
-	ft_printf("put to rms after ft_room_add: \n");
-	ft_show_all(base);
+	// ft_printf("put to rms after ft_room_add: \n");
+	// ft_show_all(base);
 	return (new);
 }
 

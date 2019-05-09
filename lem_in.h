@@ -28,7 +28,7 @@ typedef struct	s_graph
 	char			*l;
 
 	int				n_rooms;
-	struct s_way	*way;
+	struct s_way	**ways;
 	int				n_ways;
 	struct s_room	**buf;
 }					t_graph;
@@ -79,8 +79,16 @@ void	ft_show_all(t_graph *base);
 int	ft_get_ways(t_graph *base);
 int	ft_way_extract(t_graph *b, t_room **room);
 void ft_show_way(t_way *way);
+void ft_show_ways(t_graph *base);
 int	ft_bfs(t_graph *b);
 void ft_buf_clean(t_graph *b);
-int ft_start_check(t_graph *b);
+int ft_end_check(t_graph *b);
+int		ft_check_start_links_end(t_graph *b);
+
+int	ft_count_rooms_and_make_on(t_graph *b);
+int	ft_ways_and_buf_malloc(t_graph *b);
+int ft_one_way_malloc(t_graph *b, int i);
+void ft_get_way_length_and_expr(t_graph *b, t_way *way, int i);
+void ft_freeway(t_graph *b, int i);
 
 #endif
