@@ -25,6 +25,7 @@ int		main(int argc, char **argv)
 	if ((base->n_ways = ft_get_ways(base)) == 0)
 		ft_error("Error: ways was not found");
 	ft_show_ways(base);
+	ft_move_ants(base);
 	system("leaks lem-in > leaks");
 	return (0);
 }

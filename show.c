@@ -40,7 +40,10 @@ void ft_show_ways(t_graph *b)
 		i = 0;
 		ft_printf("\nWAYS:\n\n");
 		while((b->ways[i]))// && b->ways[i]->length)
+		{
+			ft_printf("#%d, ", i);
 			ft_show_way(b->ways[i++]);
+		}
 	}
 }
 
@@ -49,9 +52,9 @@ void ft_show_way(t_way *way)
 	int i;
 
 	i = -1;
-	ft_printf("Length = %d\n", way->length);
-	ft_printf("Expression = %d\n\t", way->expr);
+	ft_printf("Length = %d, ", way->length);
+	ft_printf("Expression = %d\n", way->expr);
 	while (way->room[++i])
-		ft_printf(" [%s] ", way->room[i]->name);
+		ft_printf("[%s] ", way->room[i]->name);
 	ft_printf("\n");
 }

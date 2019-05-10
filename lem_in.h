@@ -16,7 +16,6 @@ typedef enum			e_on_off
 	off, on
 }						on_off;
 
-
 typedef struct	s_graph
 {
 	struct s_room	*rms;
@@ -25,6 +24,8 @@ typedef struct	s_graph
 	int				f_rooms;
 	int				f_links;
 	int				ants;
+	int				ants_start;
+	int				ants_end;
 	char			*l;
 
 	int				n_rooms;
@@ -42,7 +43,9 @@ typedef struct	s_room
 	struct s_link	*link;
 
 	struct s_room	*parent;
-	on_off			on_off; // ?
+	on_off			on_off;
+	int				ant;
+
 }					t_room;
 
 typedef struct	s_link
@@ -56,7 +59,7 @@ typedef struct	s_way
 	struct s_room	**room;
 	int				length;
 	int				expr;
-	on_off			on_off; // ?
+
 
 }					t_way;
 
@@ -90,5 +93,9 @@ int	ft_ways_and_buf_malloc(t_graph *b);
 int ft_one_way_malloc(t_graph *b, int i);
 void ft_get_way_length_and_expr(t_graph *b, t_way *way, int i);
 void ft_freeway(t_graph *b, int i);
+
+int		ft_move_ants(t_graph *b);
+int		ft_move_ants_in_way(t_graph *b, int i);
+int		ft_show_move(t_graph *b);
 
 #endif

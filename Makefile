@@ -18,7 +18,7 @@ CC = gcc
 CC_FLAGS = -Wall -Wextra -Werror
 
 SOURCES = main.c read_rooms.c add_room.c read_links.c get_ways.c bfs.c show.c\
-			ways_init.c
+			ways_init.c move_ants.c
 
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 

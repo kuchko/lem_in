@@ -33,14 +33,21 @@ int ft_one_way_malloc(t_graph *b, int i)
 
 void ft_get_way_length_and_expr(t_graph *b, t_way *way, int i)
 {
-	t_room **tmp;
+	t_room	**tmp;
+	int		j;
 
 	tmp = way->room;
 	way->length = -1;
 	while(tmp[++way->length])
 		;
 	way->length--;
-	way->expr =  i > 0 ? b->ways[i]->length - b->ways[0]->length + b->ways[i - 1]->expr: 0;
+
+	// count expresion
+	way->expr = 0;
+	j = -1;
+	if (i > 0)
+		while (++j < i)
+			way->expr += b->ways[i]->length - b->ways[j]->length;
 }
 
 void ft_freeway(t_graph *b, int i)
