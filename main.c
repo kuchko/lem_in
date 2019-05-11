@@ -12,40 +12,29 @@
 
 #include "lem_in.h"
 
-int		main(int argc, char **argv)
+int		main()
 {
 	t_graph	*base;
 
 	base = ft_memalloc(sizeof(t_graph));
 
-	if (base == NULL || !(ft_read_valid(&base, argc, argv)))
-		ft_error("ERROR_tut\n");
-	// ft_show_all(base);
-
+	if (base == NULL || !(ft_read_valid(&base)))
+		ft_error("ERROR: data read error\n");
 	if ((base->n_ways = ft_get_ways(base)) == 0)
-		ft_error("Error: ways was not found");
+		ft_error("ERROR: ways was not found");
 	ft_show_ways(base);
 	ft_move_ants(base);
 	system("leaks lem-in > leaks");
 	return (0);
 }
 
-int	ft_read_valid(t_graph **base, int argc, char **argv)
+int	ft_read_valid(t_graph **base)
 {
 	int		fd;
 
-	if (argc == 1)
-		ft_error("usage:	lem-in input_file\n");
-	if (argc > 2)
-		ft_error("ERROR:	lem-in must have one input_file\n");
-	if ((fd = open(argv[1], O_DIRECTORY)) > 0)
-		ft_error("ERROR:	open directory is invalid\n");
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		ft_error("ERROR:	open input_file error\n");
-
+	fd = 0;
 	if (!((*base)->ants = ft_get_ants(fd)))
-		return(0);
-	// ft_printf("ants are read = %d\n", (*base)->ants);
+		ft_error("ERROR: could not read ants\n");
 	if (!(ft_get_rooms_n_links(fd, *base)))
 		return(0);
 	close(fd);

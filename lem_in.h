@@ -6,15 +6,15 @@
 # include "libft.h"
 # include <fcntl.h>
 
-typedef enum			e_align
+typedef enum		e_align
 {
 	none, normal, start, end
-}						t_align;
+}					t_align;
 
-typedef enum			e_on_off
+typedef enum		e_on_off
 {
 	off, on
-}						on_off;
+}					on_off;
 
 typedef struct	s_graph
 {
@@ -63,7 +63,7 @@ typedef struct	s_way
 
 }					t_way;
 
-int		ft_read_valid(t_graph **base, int argc, char **argv);
+int		ft_read_valid(t_graph **base);
 int		ft_get_ants(int fd);
 int		ft_get_rooms_n_links(int fd, t_graph *base);
 
@@ -75,27 +75,31 @@ int	ft_get_room_start_or_fin(t_graph *base, char **l, int fd);
 //int		ft_check_hash(t_graph *base, char **l);
 
 int		ft_get_links(int fd, char *l, t_graph *base);
-int ft_get_link(char *stroom1, char *stroom2, t_graph *base);
-int ft_add_link_to_room(t_room *room1, t_room *room2);
+int		ft_get_link(char *stroom1, char *stroom2, t_graph *base);
+int		ft_add_link_to_room(t_room *room1, t_room *room2);
 void	ft_show_all(t_graph *base);
 
-int	ft_get_ways(t_graph *base);
-int	ft_way_extract(t_graph *b, t_room **room);
-void ft_show_way(t_way *way);
-void ft_show_ways(t_graph *base);
-int	ft_bfs(t_graph *b);
-void ft_buf_clean(t_graph *b);
-int ft_end_check(t_graph *b);
+int		ft_get_ways(t_graph *base);
+int		ft_way_extract(t_graph *b, t_room **room);
+void	ft_show_way(t_way *way);
+void	ft_show_ways(t_graph *base);
+int		ft_bfs(t_graph *b);
+void	ft_buf_clean(t_graph *b);
+int		ft_end_check_for_free_links(t_graph *b);
 int		ft_check_start_links_end(t_graph *b);
 
-int	ft_count_rooms_and_make_on(t_graph *b);
-int	ft_ways_and_buf_malloc(t_graph *b);
-int ft_one_way_malloc(t_graph *b, int i);
-void ft_get_way_length_and_expr(t_graph *b, t_way *way, int i);
-void ft_freeway(t_graph *b, int i);
+int		ft_count_rooms_and_make_on(t_graph *b);
+int		ft_ways_and_buf_malloc(t_graph *b);
+int		ft_one_way_malloc(t_graph *b, int i);
+void	ft_get_way_length_and_expr(t_graph *b, t_way *way, int i);
+void	ft_freeway(t_graph *b, int i);
 
 int		ft_move_ants(t_graph *b);
 int		ft_move_ants_in_way(t_graph *b, int i);
 int		ft_show_move(t_graph *b);
+int		ft_show_move_in_one(t_graph *b);
+
+int		ft_send_end(t_graph *b, t_room **room);
+
 
 #endif

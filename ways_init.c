@@ -41,7 +41,6 @@ void ft_get_way_length_and_expr(t_graph *b, t_way *way, int i)
 	while(tmp[++way->length])
 		;
 	way->length--;
-
 	// count expresion
 	way->expr = 0;
 	j = -1;

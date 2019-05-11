@@ -1,0 +1,1 @@
+./generator.dms --big > test999 | ./lem-in < test999

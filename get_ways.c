@@ -12,8 +12,8 @@ int	ft_get_ways(t_graph *b)
 		ft_error("ERROR: ways malloc error in 'ft_get_ways'\n");
 	i = 0;
 	if (ft_check_start_links_end(b))
-		ft_error("END linked to START: all ants move in one step\n");
-	while(ft_end_check(b))
+		ft_show_move_in_one(b);
+	while(ft_end_check_for_free_links(b))
 	{
 		// ft_printf("\nft_get_ways in while\n");
 		if (!(ft_one_way_malloc(b , i)))
@@ -51,7 +51,7 @@ int		ft_check_start_links_end(t_graph *b)
 	return(i);
 }
 
-int ft_end_check(t_graph *b)
+int ft_end_check_for_free_links(t_graph *b)
 {
 	t_link *lnk;
 	int i;
@@ -92,20 +92,36 @@ int	ft_way_extract(t_graph *b, t_room **room)
 	i = 0;
 	while(tmp)
 	{
-		room[i++] = tmp;
-		if (tmp == b->end)
+		room[i] = tmp;
+		if (tmp == b->end && ft_send_end(b, &room[i]))
 			break;
+		if (i != 0)
+			tmp->on_off = off;
 		tmp = tmp->parent;
+		i++;
 	}
 	// delete way from graph
-	i = 0;
-	// ft_printf("Cleaning : ");
-	while(room[++i] != b->end)
-	{
-		room[i]->on_off = off;
-		// ft_printf("{%s>>%d} ", room[i]->name, room[i]->on_off);
-	}
+	// i = 0;
+	// // ft_printf("Cleaning : ");
+	// while(room[++i] != b->end)
+	// {
+	// 	room[i]->on_off = off;
+	// 	// ft_printf("{%s>>%d} ", room[i]->name, room[i]->on_off);
+	// }
 	return(1);
+}
+
+int ft_send_end(t_graph *b, t_room **room)
+{
+	room[0] = (t_room*)ft_memalloc(sizeof(t_room));
+	room[0]->name = b->end->name;
+	room[0]->x = b->end->x;
+	room[0]->y = b->end->y;
+	room[0]->next = b->end->next;
+	room[0]->link = b->end->link;
+	room[0]->parent = b->end->parent;
+	room[0]->on_off = on;
+	return (1);
 }
 
 void ft_buf_clean(t_graph *b)

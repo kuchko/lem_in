@@ -19,16 +19,16 @@ int		ft_move_ants(t_graph *b)
 		while (b->ants_start > 0 && b->ways[++i])
 		{
 			// ft_printf("ant start %d", b->start->ant);
-
 			if (b->ants_start > b->ways[i]->expr)
 			{
 				b->ants_start--;
 				b->ways[i]->room[1]->ant = b->ants - b->ants_start;
 			}
 		}
-		ft_show_move(b);
+		if (b->ants_end < b->ants)
+			ft_show_move(b);
 	}
-	ft_printf("moves = %d\n", moves);
+	ft_printf("Moves = %d\n", moves);
 	return (moves);
 }
 
@@ -48,25 +48,5 @@ int		ft_move_ants_in_way(t_graph *b, int i)
 			b->ways[i]->room[j]->ant = b->ways[i]->room[j - 1]->ant;
 		j--;
 	}
-	return (1);
-}
-
-int		ft_show_move(t_graph *b)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while(b->ways[++i])
-	{
-		j = b->ways[i]->length;
-		while (j > 0)
-		{
-			if (b->ways[i]->room[j]->ant)
-				ft_printf("L%d-%s ", b->ways[i]->room[j]->ant, b->ways[i]->room[j]->name);
-			j--;
-		}
-	}
-	ft_printf("\n");
 	return (1);
 }
