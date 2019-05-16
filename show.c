@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   show.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: okuchko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/13 14:15:41 by okuchko           #+#    #+#             */
+/*   Updated: 2019/05/13 14:15:44 by okuchko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-void	ft_show_all(t_graph *base)
+void	ft_show_all_read(t_graph *base)
 {
 	t_room *tmp;
 	t_link *lnk;
 
 	ft_printf("					show all: ants=> %d\n", base->ants);
 	tmp = base->rms;
-	while(tmp)
+	while (tmp)
 	{
-		if(tmp == base->start)
+		if (tmp == base->start)
 			ft_printf("START >>> ");
-		else if(tmp == base->end)
+		else if (tmp == base->end)
 			ft_printf("END >>> ");
 		ft_printf("name = %s; x = %d; y = %d ", tmp->name, tmp->x, tmp->y);
 		if ((lnk = tmp->link))
 		{
 			ft_printf("| LINKS :: ");
-			while(lnk && lnk->room)
+			while (lnk && lnk->room)
 			{
 				ft_printf("L%s-%s | ", tmp->name, lnk->room->name);
 				lnk = lnk->next;
@@ -29,32 +41,29 @@ void	ft_show_all(t_graph *base)
 	ft_printf("\n");
 }
 
-
-void ft_show_ways(t_graph *b)
+void	ft_show_ways(t_graph *b)
 {
 	int i;
-
 
 	if (b->ways)
 	{
 		i = 0;
-		ft_printf("\nWAYS:\nn");
-		while((b->ways[i]))
+		ft_printf("\nWAYS:\n");
+		while ((b->ways[i]))
 		{
-			ft_printf("#%d, ", i);
+			ft_printf("#%02d, ", i);
 			ft_show_way(b->ways[i++]);
 		}
 		ft_printf("\n");
 	}
 }
 
-void ft_show_way(t_way *way)
+void	ft_show_way(t_way *way)
 {
 	int i;
 
 	i = -1;
-	ft_printf("Length = %d, ", way->length);
-	ft_printf("Expression = %d\n", way->expr);
+	ft_printf("length = %3d: ", way->length);
 	while (way->room[++i])
 		ft_printf("[%s] ", way->room[i]->name);
 	ft_printf("\n");
@@ -66,13 +75,14 @@ int		ft_show_move(t_graph *b)
 	int	j;
 
 	i = 0;
-	while(b->ways[i])
+	while (b->ways[i])
 	{
 		j = b->ways[i]->length;
 		while (j > 0)
 		{
 			if (b->ways[i]->room[j]->ant)
-				ft_printf("L%d-%s ", b->ways[i]->room[j]->ant, b->ways[i]->room[j]->name);
+				ft_printf("L%d-%s ", b->ways[i]->room[j]->ant,
+									b->ways[i]->room[j]->name);
 			j--;
 		}
 		i++;
@@ -81,7 +91,7 @@ int		ft_show_move(t_graph *b)
 	return (1);
 }
 
-int ft_show_move_in_one(t_graph *b)
+int		ft_show_move_in_one_step(t_graph *b)
 {
 	int	i;
 

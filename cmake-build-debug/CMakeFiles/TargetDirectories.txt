@@ -1,3 +1,0 @@
-/Users/okuchko/projects_hub/lem_in/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/okuchko/projects_hub/lem_in/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/okuchko/projects_hub/lem_in/cmake-build-debug/CMakeFiles/lem_in.dir

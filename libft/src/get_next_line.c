@@ -82,7 +82,6 @@ int				get_next_line(const int fd, char **line)
 	int				ret;
 
 	buf = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
-	// if (fd < 0 || BUFF_SIZE < 1 || read(fd, buf, 0) < 0
 	if (fd < 0 || BUFF_SIZE < 1 || !line || read(fd, buf, 0) < 0
 						|| !buf || !(this = ft_listing(&lst, fd)))
 		return (-1);

@@ -12,12 +12,11 @@
 
 #include "lem_in.h"
 
-int		main()
+int	main(void)
 {
 	t_graph	*base;
 
 	base = ft_memalloc(sizeof(t_graph));
-
 	if (base == NULL || !(ft_read_valid(&base)))
 		ft_error("ERROR: data read error\n");
 	if ((base->n_ways = ft_get_ways(base)) == 0)
@@ -36,16 +35,16 @@ int	ft_read_valid(t_graph **base)
 	if (!((*base)->ants = ft_get_ants(fd)))
 		ft_error("ERROR: could not read ants\n");
 	if (!(ft_get_rooms_n_links(fd, *base)))
-		return(0);
+		return (0);
 	close(fd);
-	return(1);
+	return (1);
 }
 
 int	ft_get_ants(int fd)
 {
-	int res;
-	char *line;
-	int i;
+	int		res;
+	char	*line;
+	int		i;
 
 	i = -1;
 	if ((res = get_next_line(fd, &line)) == 1)
@@ -62,6 +61,5 @@ int	ft_get_ants(int fd)
 	}
 	if (res != -1)
 		free(line);
-	return(res < 1 ? 0 : res);
+	return (res < 1 ? 0 : res);
 }
-
